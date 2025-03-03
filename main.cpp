@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
     glutCreateWindow("Physics Simulation with OpenGL");
 
     // Инициализация состояния тела
-    state.position = glm::dvec3(0.0, 0.0, 0.0);
+    state.position = glm::dvec3(0.0, -5.0, 0.0);
     state.momentum = glm::dvec3(0.0, 0.0, 0.0);
     state.quaternion = glm::dquat(1.0, 0.0, 0.0, 0.0);
     state.angular_momentum = glm::dvec3(0.0, 0.0, 0.0);
@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
 
     // Инициализация внешних сил
     forces.gravity = glm::dvec3(0.0, -9.81, 0.0);
-    forces.buoyancy = glm::dvec3(0.0, 9.81, 0.0);
+    forces.buoyancy = glm::dvec3(0.0, 15.0, 0.0);
     forces.drag = glm::dvec3(-0.1, 0.0, 0.0);
 
     initOpenGL();
