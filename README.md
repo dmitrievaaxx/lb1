@@ -2,5 +2,8 @@
 Численное интегрирование выполняется с использованием **метода Рунге-Кутты 4-го порядка**
 
 ---
+## Запуск  
+git clone https://github.com/dmitrievaaxx/lb1.git  
+cd lb1  
 make  
 ./simulation
