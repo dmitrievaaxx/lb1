@@ -1,4 +1,5 @@
 #include "render.hpp"
+#include "simulation.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 
 extern State state;
@@ -21,6 +22,9 @@ void drawScene() {
 
     glPushMatrix();
     glTranslatef(state.position.x, state.position.y, state.position.z);
+
+    state.quaternion = glm::normalize(state.quaternion);
+
     glm::dquat q = state.quaternion;
     float angle = glm::degrees(glm::angle(q));
     glm::dvec3 axis = glm::axis(q);
@@ -34,6 +38,8 @@ void drawScene() {
 void update(int value) {
     runge_kutta_4(state, constants, forces, dt);
     simulation_time += dt;
+
+    print_energy(state, constants);
     glutPostRedisplay();
     glutTimerFunc(16, update, 0);
 }
