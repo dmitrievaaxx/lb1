@@ -14,27 +14,30 @@ int main(int argc, char** argv) {
     glutCreateWindow("Physics Simulation with OpenGL");
 
     // Инициализация состояния тела
-    state.position = glm::dvec3(0.0, -5.0, 0.0);
+    state.position = glm::dvec3(5.0, 3.0, 0.0);
     state.momentum = glm::dvec3(0.0, 0.0, 0.0);
     state.quaternion = glm::dquat(1.0, 0.0, 0.0, 0.0);
     state.angular_momentum = glm::dvec3(0.0, 0.0, 0.0);
 
     // Инициализация констант тела
     constants.mass = 1.0;
-    constants.inertia_tensor = glm::dmat3(1.0);
+    constants.cube_size = 1.0;
+    double I = (1.0 / 6.0) * constants.mass * constants.cube_size * constants.cube_size;
+    constants.inertia_tensor = glm::dmat3(
+        I, 0.0, 0.0, 
+        0.0, I, 0.0, 
+        0.0, 0.0, I  
+    );
 
     // Инициализация внешних сил
     forces.gravity = glm::dvec3(0.0, -9.81, 0.0);
-    forces.buoyancy = glm::dvec3(0.0, 15.0, 0.0);
+    forces.rho = 1000.0;
     forces.drag = glm::dvec3(-0.1, 0.0, 0.0);
 
     initOpenGL();
-
     glutDisplayFunc(drawScene);
     glutReshapeFunc(reshape);
     glutTimerFunc(0, update, 0);
-
     glutMainLoop();
-
     return 0;
 }
