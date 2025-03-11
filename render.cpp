@@ -26,7 +26,7 @@ void drawScene() {
     state.quaternion = glm::normalize(state.quaternion);
 
     glm::dquat q = state.quaternion;
-    float angle = glm::degrees(glm::angle(q));
+    float angle = glm::degrees(2.0 * atan2(glm::length(glm::dvec3(q.x, q.y, q.z)), q.w));
     glm::dvec3 axis = glm::axis(q);
     glRotatef(angle, axis.x, axis.y, axis.z);
     glutWireCube(1.0);
