@@ -8,6 +8,6 @@ State compute_derivatives(const State& state, const Constants& constants, const 
 
 void runge_kutta_4(State& state, const Constants& constants, const ExternalForces& forces, double dt);
 
-void print_energy(const State &state, const Constants &constants);
+void print_energy(const State &state, const Constants &constants, const ExternalForces &forces);
 
 #endif
