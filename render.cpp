@@ -39,7 +39,7 @@ void update(int value) {
     runge_kutta_4(state, constants, forces, dt);
     simulation_time += dt;
 
-    print_energy(state, constants);
+    print_energy(state, constantsб forces);
     glutPostRedisplay();
     glutTimerFunc(16, update, 0);
 }
