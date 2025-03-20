@@ -63,8 +63,16 @@ void runge_kutta_4(State &state, const Constants &constants, const ExternalForce
 }
 
 
-void print_energy(const State &state, const Constants &constants) {
+void print_energy(const State &state, const Constants &constants, const ExternalForces &forces) {
     double kinetic_energy = glm::dot(state.momentum, state.momentum) / (2.0 * constants.mass);
     double potential_energy = constants.mass * 9.81 * state.position.y;
-    std::cout << "Total Energy: " << (kinetic_energy + potential_energy) << std::endl;
+    
+    // Вычисление потенциальной энергии Архимедовой силы
+    double offset = 4.0;
+    double submerged_depth = std::max(0.0, -state.position.y + constants.cube_size / 2.0 - offset);
+    double submerged_volume = constants.cube_size * constants.cube_size * std::min(submerged_depth, constants.cube_size);
+    double buoyancy_potential_energy = forces.rho * 9.81 * submerged_volume * (submerged_depth / 2.0);
+    
+    double total_energy = kinetic_energy + potential_energy + buoyancy_potential_energy;
+    std::cout << "Total Energy: " << total_energy << std::endl;
 }
